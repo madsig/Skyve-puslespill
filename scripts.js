@@ -16,7 +16,8 @@ function updateView() {
 }
 
 //controller
-app.addEventListener("click", function (event) {
+app.addEventListener("click", handleClick);
+function handleClick(event) {
     if (event.target.id === "app") return;
     let clickedBox = parseInt(event.target.id);
     let emptyBox = numbers.indexOf('');
@@ -26,7 +27,7 @@ app.addEventListener("click", function (event) {
         updateView();
         checkWin();
     }
-});
+}
 
 
 function isAdjacent(box1, box2) {
@@ -53,6 +54,7 @@ function checkWin() {
     if (JSON.stringify(numbers) == JSON.stringify(correct)) {
         setTimeout(function () {
             alert("Gratulerer! Du greide det");
+            app.removeEventListener("click", handleClick);
         }, 200);
     }
 }
